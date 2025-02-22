@@ -29,8 +29,9 @@ def test_calc_tax_negative():
 def test_calc_tax_param(prices, tax, result):
     assert calculate_taxes(prices, tax) == result
 
-def test_calculate_tax_normal():
-    assert calculate_tax(10, 10) == 11
+@pytest.mark.parametrize("price, tax, result", [(100, 10, 110), (50, 5, 52.5)])
+def test_calculate_tax_normal(price, tax, result):
+    assert calculate_tax(price, tax) == result
 
 def test_calculate_tax_negative_price():
     with pytest.raises(ValueError):
