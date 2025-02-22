@@ -49,3 +49,18 @@ def test_calculate_tax_100():
     with pytest.raises(ValueError):
         calculate_tax(10, 100)
 
+def test_calculate_tax_discount():
+    assert calculate_tax(100, 10, 5) == 104.5
+
+def test_calculate_tax_discount_zero():
+    assert calculate_tax(100, 10) == 110
+
+def test_calculate_tax_discount_round():
+    assert calculate_tax(95, 11, 5, 3) == 100.177
+
+def test_calculate_tax_discount_round_default():
+    assert calculate_tax(95, 11, 5) == 100.18
+
+def test_calculate_tax_discount_round_with_type():
+    with pytest.raises(TypeError):
+        calculate_tax("2", "11", 5)
