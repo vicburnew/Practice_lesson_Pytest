@@ -50,25 +50,25 @@ def test_calculate_tax_100():
         calculate_tax(10, 100)
 
 def test_calculate_tax_discount():
-    assert calculate_tax(100, 10, 5) == 104.5
+    assert calculate_tax(100, 10, discount=5) == 104.5
 
 def test_calculate_tax_discount_zero():
     assert calculate_tax(100, 10) == 110
 
 def test_calculate_tax_discount_round():
-    assert calculate_tax(95, 11, 5, 3) == 100.177
+    assert calculate_tax(95, 11, discount=5, round_dig=3) == 100.177
 
 def test_calculate_tax_discount_round_default():
-    assert calculate_tax(95, 11, 5) == 100.18
+    assert calculate_tax(95, 11, discount=5) == 100.18
 
 @pytest.mark.parametrize("round_dig, expected", [(0, 99),
                                                  (1, 99.4),
                                                  (2, 99.42),
                                                  (3, 99.425)])
 def test_calculate_tax_discount_round_new(round_dig, expected):
-    assert calculate_tax(100, 2.5, 3, round_dig) == expected
+    assert calculate_tax(100, 2.5, discount=3, round_dig=round_dig) == expected
 
 
 def test_calculate_tax_discount_round_with_type():
     with pytest.raises(TypeError):
-        calculate_tax("2", "11", 5)
+        calculate_tax("2", "11", discount="5")

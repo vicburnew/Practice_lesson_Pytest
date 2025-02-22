@@ -14,8 +14,18 @@ def calculate_taxes(prices: list[float], tax_rate: float) -> list[float]:
 
     return taxed_prices
 
-def calculate_tax(price: float, tax_rate: float, discount = 0, round_dig = 2) -> float:
+def calculate_tax(
+        price: float, # это начало позиционной части аргументов функции
+        tax_rate: float,
+        *, # * # - это начало именованной части аргументов функции
+        discount = 0,
+        round_dig = 2) -> float:
     """Функция вычисляет стоимость товара с учетом налога и возвращает результат"""
+
+    for arg in [price, tax_rate, discount, round_dig]:
+        if not isinstance(arg, int | float):
+            raise TypeError("Ошибка типа данных")
+
     if tax_rate < 0 or tax_rate >= 100:
         raise ValueError('Неверный налоговый процент')
 
