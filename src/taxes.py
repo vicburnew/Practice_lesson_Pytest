@@ -22,6 +22,6 @@ def calculate_tax(price: float, tax_rate: float) -> float:
     if price <= 0:
         raise ValueError('Неверная цена')
 
-    return  price * tax_rate / 100
+    return  price + (price * tax_rate) / 100
 
 
