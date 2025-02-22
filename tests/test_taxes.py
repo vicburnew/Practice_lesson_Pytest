@@ -21,5 +21,12 @@ def test_calc_tax_negative():
     assert str(exec_info.value) == "Неверный налоговый процент"
 
 
+@pytest.mark.parametrize("prices, tax, result", [
+    ([10, 20, 30], 10, [11, 22, 33]),
+    ([10, 20, 30], 100, [20, 40, 60]),
+    ([10, 20, 30], 50, [15, 30, 45])
+])
+def test_calc_tax_param(prices, tax, result):
+    assert calculate_taxes(prices, tax) == result
 
 
